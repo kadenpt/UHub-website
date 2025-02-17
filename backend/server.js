@@ -35,12 +35,17 @@ app.post("/subscribe", async (req, res) => {
 
     try {
         await pool.query("INSERT INTO emails (email) VALUES ($1)", [email]);
-        res.json({ message: "Email subscribed successfully!" });
+        res.json({ message: "✅ Email subscribed successfully!" });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Email already exists or error occurred" });
+        if (err.code === "23505") { // Unique constraint violation
+            res.status(400).json({ message: "⚠️ Email is already subscribed!" });
+        } else {
+            console.error(err);
+            res.status(500).json({ message: "❌ Server error. Please try again." });
+        }
     }
 });
+
 
 // API Route to retrieve all emails
 app.get("/emails", async (req, res) => {
