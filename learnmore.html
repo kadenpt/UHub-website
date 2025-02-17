@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="'en">
+<!-- head content-->
+<head>
+    <title> UHub </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="page-top">
+            <div>   
+                <h1> UHub </h1>
+                <h3> Your University, Your Hub </h3> 
+            </div>
+                <img class="logo" src="photos/uhublogo.png">
+            </div>
+        <div>
+            <button onclick="location.href='index.html'" class="inline-buttons"> What UHub is </button>
+            <button onclick="location.href='timeline.html'" class="inline-buttons"> Timeline </button>
+            <button onclick="location.href='ourteam.html'" class="inline-buttons"> Our Team </button>
+            <button onclick="location.href='learnmore.html'" class="inline-buttons"> <b>Learn More</b> </button>
+        </div>
+        </div>
+        <hr class="break">
+    <!-- Email sign up-->
+<div class="email-sign-up">
+    <h2> Are you interested in hearing more? </h2>
+    <h3> Follow us on Instagram </h3>
+    <p> Follow us on Instagram at <a href="https://www.instagram.com/uhub.app/" target="_blank"> @uhub.app</a> to stay up to date with relevant updates.</p>
+    <h3> Sign up for email notifications below </h3>
+    <p> By signing up for emails, you consent to receiving updates on development, being asked for feedback and opinions, and more. </p>
+    <form id="signup-form">
+        <input class="email-box" type="email" id="email" name="email" placeholder="Enter your email" required>
+        <button class="email-button" type="submit">Sign up</button>
+    </form>
+    <p id="message"></p>
+    <script>
+        document.getElementById("signup-form").addEventListener("submit", async function (event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+
+            const response = await fetch("http://localhost:5001/subscribe", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email })
+            });
+
+            const result = await response.json();
+            document.getElementById("message").textContent = result.message;
+        });
+    </script>
+    <h3> Interested in becoming a beta tester? </h3>
+    <p> If you are going to be attending the University of British Columbia for the summer semester and are interested in beta testing the app, or if you are part of an organization looking to beta test the app, email us at PLACEHOLDER with your full name, year standing, and organization details (if applicable). </p>
+</div>
+</body>

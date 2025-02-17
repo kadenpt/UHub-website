@@ -1,10 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
 
 h1 {
     text-align: center;
-    font-size: 50px;
+    font-size: 100px;
+    font-family: "Fredoka", sans-serif;
+    font-weight: 700;
+    color: #1c997e;
+    margin-bottom: -2%;
 }
 
-.thirty-width {
+h2 {
+    font-family: "Fredoka", sans-serif; 
+    color: #1c997e;
+    font-size: 40px;
+}
+
+.header {
+    text-align: center;
+    padding: 0;
+    font-size: 25px;
+}
+
+h3 {
+    font-family: "Fredoka", sans-serif; 
+    color: #1c997e;
+}
+
+h4 {
+    font-family: "Fredoka", sans-serif; 
+    color: #1c997e;
+}
+
+p {
+    font-family: "Fredoka", sans-serif;
+}
+.forty-width {
+    width: 40%;
+    margin-left: 5%;
+    animation: slideIn 1s ease-out forwards;
+}
+
+.team {
+    text-align: center;
+    background-color: #1c997e;
+    border-radius: 20px;
+    margin: 3% 20%;
+}
+
+.team-photos {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.team-header {
+    color: white;
+    margin: auto;
+}
+
+.inline-img {
+    display: inline-block;
+    margin: 0 15px;
+    color: white;
+}
+
+.email-sign-up {
+    margin-left: 5%;
+    margin-right: 5%;
+    animation: slideIn 1s ease-out forwards;
+
+}
+
+.email-box {
+    border-radius: 10px;
+    font-family: "Fredoka", sans-serif;
     width: 30%;
-    margin-left: 50px;
+    height: 10%;
+}
+
+.email-button {
+    border-radius: 10px;
+    font-family: "Fredoka", sans-serif;
+    background-color: #1c997e;
+    color: white;
+    border-color: transparent;
+    width: 80px;
+}
+
+.break {
+    width: 90%;
+    border: 2px solid #1c997e
+}
+
+.inline-buttons {
+    margin: 0 5%;
+    border: none;
+    background-color: transparent;
+    font-family: "Fredoka", sans-serif;
+    color:#1c997e;
+    font-size: 20px;
+}
+
+.block {
+    display: flex;
+    gap: 10%;
+    margin: 0 5%;
+    margin-bottom: 5%;
+}
+
+.container {
+    flex: 1;
+    max-width: 50%;
+    text-align: center;
+    background-color: #1c997e;
+    border-radius: 15px;
+    padding: 0 1%;
+}
+
+.disclaimer {
+    color: grey;
+    margin-top: 10%;
+    font-size: 15px;
+}
+
+.functionality {
+    margin-top: -2%;
+}
+
+.page-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.timeline {
+    animation: slideIn 1s ease-out forwards;
+}
+
+.ourteam {
+    animation: slideIn 1s ease-out forwards;
 }
