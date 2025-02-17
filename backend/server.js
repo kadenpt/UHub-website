@@ -1,45 +1,60 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const sqlite3 = require("sqlite3").verbose();
+const { Pool } = require("pg");
 
 const app = express();
-const db = new sqlite3.Database("./emails.db");
+
+// PostgreSQL connection pool
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
+});
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
 // Create table if not exists
-db.run("CREATE TABLE IF NOT EXISTS emails (id INTEGER PRIMARY KEY, email TEXT UNIQUE)");
+pool.query(`
+    CREATE TABLE IF NOT EXISTS emails (
+        id SERIAL PRIMARY KEY,
+        email TEXT UNIQUE NOT NULL
+    );
+`).then(() => console.log("✅ Table checked/created"))
+  .catch(err => console.error("❌ Table creation error", err));
 
 // API Route to store emails
-app.post("/subscribe", (req, res) => {
+app.post("/subscribe", async (req, res) => {
     const { email } = req.body;
 
     if (!email) {
         return res.status(400).json({ message: "Email is required" });
     }
 
-    db.run("INSERT INTO emails (email) VALUES (?)", [email], (err) => {
-        if (err) {
-            return res.status(500).json({ message: "Email already exists or error occurred" });
-        }
+    try {
+        await pool.query("INSERT INTO emails (email) VALUES ($1)", [email]);
         res.json({ message: "Email subscribed successfully!" });
-    });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Email already exists or error occurred" });
+    }
 });
 
-app.get("/emails", (req, res) => {
-    db.all("SELECT * FROM emails", [], (err, rows) => {
-        if (err) {
-            return res.status(500).json({ message: "Error retrieving emails" });
-        }
+// API Route to retrieve all emails
+app.get("/emails", async (req, res) => {
+    try {
+        const { rows } = await pool.query("SELECT * FROM emails");
         res.json(rows);
-    });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error retrieving emails" });
+    }
 });
-
 
 // Start server
-app.listen(5001, () => {
-    console.log("Server running on port 5001");
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => {
+    console.log(`✅ Server running on port ${PORT}`);
 });
