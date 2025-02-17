@@ -42,9 +42,7 @@
             const email = document.getElementById("email").value;
     
             // Automatically detect if running locally or in production
-            const API_URL = window.location.hostname === "localhost"
-                ? "http://localhost:5001/subscribe" 
-                : "https://uhub-website.onrender.com"; // Replace with your actual Render backend URL
+            const API_URL = "https://uhub-website.onrender.com"; // Replace with your actual Render backend URL
     
             try {
                 const response = await fetch(API_URL, {
