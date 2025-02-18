@@ -160,3 +160,31 @@ p {
 .ourteam {
     animation: slideIn 1s ease-out forwards;
 }
+
+.visuals {
+    object-fit: cover;
+    width: 24vw;
+    height: auto;
+    padding: 2vw 0;
+}
+
+.indexcontainer {
+    display: flex;
+    align-items: top;
+    justify-content: space-between;
+    padding: 0 5vw;
+    animation: slideIn 1s ease-out forwards;
+}
+
+.text-section {
+    max-width: 55%;
+}
+
+.image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 5%;
+}
